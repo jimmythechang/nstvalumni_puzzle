@@ -8,8 +8,8 @@ function DrawManager() {
     this.words = [];
     this.clickedWord = null;
 
-    this.upArrow = new Arrow(400, 100, true);
-    this.downArrow = new Arrow(400, 300, false);
+    this.upArrow = new Arrow(475, 150, true);
+    this.downArrow = new Arrow(475, 300, false);
 
     this.draw = draw;
     function draw() {
