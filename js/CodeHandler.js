@@ -45,7 +45,7 @@ function CodeHandler() {
                 console.log(data);
                 $('#canvas').fadeOut(500, function() { 
                     $(this).remove()
-                    MapHandler.mapInitialize(data.lat, data.lng);
+                    MapHandler.mapInitialize(data.lat, data.lng, data.info);
                 });
 
                 //MapHandler.mapInitialize(data.lat, data.lng);

@@ -9,12 +9,12 @@ if (isset($_POST['letterArr'])) {
         in_array("T107", $letterArr) &&
         in_array("V202", $letterArr)) {
 
-        $html = generateHtml();
+        $html = generateInfoContent();
 
         $response = array('success' => true,
-                          'lat'     => '34.090747',
-                          'lng'     => '-118.345592',
-                          'payload' => $html);
+                          'lat'     => '34.09060',
+                          'lng'     => '-118.3461',
+                          'info' => $html);
     }
     else {
         $response = array('success' => false);
@@ -28,7 +28,16 @@ else {
     die();
 }
 
-function generateHtml() {
+function generateInfoContent() { 
+    $html ='<div id="content">
+                <h1>Formosa Cafe</h1>
+                <div>7156 Santa Monica Blvd</div>
+                <div>West Hollywood, CA 90046</div>
+            </div>';
+    
+
+    return $html;
 }
 
 ?>
+    
