@@ -29,24 +29,30 @@ function CodeHandler() {
         else {
             this.letters.push(id);
         }
-        
+
+        this.verifyLetters();
         console.log(this.letters);
     }
 
     this.validate = validate;
     function validate() {
         $.ajax({
-            url: "/Validator.php",
+            url: "Validator.php",
             type: "POST",
-            data: this.letters,
-            success: function() {
-                console.log("Successsss");
+            data: { letterArr : this.letters },
+            dataType: "JSON",
+            success: function(data) {
+                console.log(data);
+                $('#canvas').fadeOut(500, function() { $(this).remove()});
+                
             },
             error: function() {
                 console.log("Errorrrr");
             }
         });
     }
+
+
 }
 
 
