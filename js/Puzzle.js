@@ -1,4 +1,4 @@
-var requireArr = ["jquery", "GlobalManager", "MouseHandler", "CodeHandler", "DrawManager", "Word", "Letter", "Arrow"];
+var requireArr = ["jquery", "GlobalManager", "MouseHandler", "CodeHandler", "DrawManager", "Word", "Letter", "Arrow", "MapHandler"];
 
 require(requireArr, function($) {
     $(document).ready( function() {

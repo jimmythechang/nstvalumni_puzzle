@@ -1,0 +1,9 @@
+
+root { 
+    display: block;
+}
+
+#canvasContainer {
+    min-height: 500px;
+}
+

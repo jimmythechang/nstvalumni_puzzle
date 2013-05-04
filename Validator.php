@@ -9,7 +9,11 @@ if (isset($_POST['letterArr'])) {
         in_array("T107", $letterArr) &&
         in_array("V202", $letterArr)) {
 
+        $html = generateHtml();
+
         $response = array('success' => true,
+                          'lat'     => '34.090747',
+                          'lng'     => '-118.345592',
                           'payload' => $html);
     }
     else {
@@ -25,7 +29,6 @@ else {
 }
 
 function generateHtml() {
-    
 }
 
 ?>
