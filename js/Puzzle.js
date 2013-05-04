@@ -1,19 +1,19 @@
-var requireArr = ["jquery", "GlobalManager", "MouseHandler", "DrawManager", "Word", "Letter", "Arrow"];
+var requireArr = ["jquery", "GlobalManager", "MouseHandler", "CodeHandler", "DrawManager", "Word", "Letter", "Arrow"];
 
 require(requireArr, function($) {
     $(document).ready( function() {
         var gm = new GlobalManager();
         gm.init();
 
-        var word = new Word("MANIFEST", 100, 200);
+        var word = new Word("MANIFEST", 100, 200, 100);
         gm.drawManager.registerWord(word);
 
-        var word2 = new Word("LEVITY", 400, 200);
+        var word2 = new Word("LEVITY", 400, 200, 200);
         gm.drawManager.registerWord(word2);
 
-        var word3 = new Word("INSANITY", 400, 200);
+        var word3 = new Word("INSANITY", 400, 200, 300);
 
-        var word4 = new Word("DESTINY", 400, 200);
+        var word4 = new Word("DESTINY", 400, 200, 400);
 
         // Link the words together.
 

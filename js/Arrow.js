@@ -24,6 +24,29 @@ function Arrow(x, y, up) {
         ctx.fill();
     }
 
+    this.clickedInBounds = clickedInBounds;
+    function clickedInBounds(mouseX, mouseY) {
+
+            var leftBound = this.x;
+            var rightBound = this.x + Arrow.width;
+
+            // The means for calculating the upper and lower bounds differs
+            // depending on whether the arrow is up or down.
+
+            var upperBound = this.y;
+            var lowerBound = this.y + Arrow.height;
+
+            if (this.up) {
+                upperBound = this.y - Arrow.height;
+                lowerBound = this.y;
+            }
+
+            return (mouseX > leftBound &&
+                    mouseX <= rightBound &&
+                    mouseY > upperBound &&
+                    mouseY <= lowerBound);
+    }
+
     this.setWord = setWord;
     function setWord(word) {
         this.word = word;

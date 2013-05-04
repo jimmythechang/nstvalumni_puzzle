@@ -42,7 +42,7 @@ function DrawManager() {
     function determinesWordIsInRange(mouseX, mouseY) {
         for (var i in this.words) {
             var word = this.words[i];
-            if (this.clickInBounds(mouseX, mouseY, word.x, word.y, word.width, word.height)) {
+            if (word.clickedInBounds(mouseX, mouseY)) {
                 this.clickedWord = word;
                 return true;
             }
@@ -55,27 +55,14 @@ function DrawManager() {
     function handleArrowClicks(mouseX, mouseY) {
         var word = null;
 
-        if (this.clickInBounds(mouseX, mouseY, this.upArrow.x, this.upArrow.y - Arrow.height, Arrow.width, this.upArrow.y)) {
+        if (this.upArrow.clickedInBounds(mouseX, mouseY)) {
             word = this.words.pop();
             this.registerWord(word.nextWord);
         }
-        else if (this.clickInBounds(mouseX, mouseY, this.downArrow.x, this.downArrow.y, Arrow.width, Arrow.height)) {
+        else if (this.downArrow.clickedInBounds(mouseX, mouseY)) {
             word = this.words.pop();
             this.registerWord(word.previousWord);
         }
-    }
-
-    this.clickInBounds = clickInBounds;
-    function clickInBounds(mouseX, mouseY, itemX, itemY, itemWidth, itemHeight) {
-            var leftBound = itemX;
-            var rightBound = itemX + itemWidth;
-            var upperBound = itemY;
-            var lowerBound = itemY + itemHeight;
-
-            return (mouseX > leftBound &&
-                    mouseX <= rightBound &&
-                    mouseY > upperBound &&
-                    mouseY <= lowerBound);
     }
 
     this.drawArrows = drawArrows;

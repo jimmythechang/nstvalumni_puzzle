@@ -13,6 +13,8 @@ function GlobalManager() {
 
         this.mouseHandler = new MouseHandler();
         this.mouseHandler.init();
+
+        this.codeHandler = new CodeHandler();
     }
 
 

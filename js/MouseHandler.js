@@ -55,6 +55,9 @@ function MouseHandler() {
                 var letter = drawManager.clickedWord.getClickedLetter(x, y);
                 letter.toggle();
 
+                var codeHandler = window.globalManager.codeHandler;
+                codeHandler.registerLetter(letter);
+
                 $('#clickDebug').text("Letter clicked: " + letter.character);
                 return;
             }

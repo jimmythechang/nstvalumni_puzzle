@@ -1,9 +1,10 @@
-function Letter(character, x, y) {
+function Letter(character, x, y, id) {
 
     this.x = x;
     this.y = y;
     
     this.character = character;
+    this.id = id;
 
     this.isClicked = false;
 
@@ -25,6 +26,19 @@ function Letter(character, x, y) {
     this.toggle = toggle;
     function toggle() {
         this.isClicked = !this.isClicked;
+    }
+
+    this.clickedInBounds = clickedInBounds;
+    function clickedInBounds(mouseX, mouseY) {
+        var leftBound = this.x;
+        var rightBound = this.x + Letter.width;
+        var upperBound = this.y;
+        var lowerBound = this.y + Letter.height;
+
+        return (mouseX > leftBound &&
+                mouseX <= rightBound &&
+                mouseY > upperBound &&
+                mouseY <= lowerBound);
     }
 }
 

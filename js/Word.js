@@ -1,5 +1,5 @@
 
-function Word(wordString, x, y) {
+function Word(wordString, x, y, letterSeed) {
     this.x = x;
     this.y = y;
 
@@ -15,7 +15,11 @@ function Word(wordString, x, y) {
 
     for (var i = 0; i < wordString.length; i++) {
         var xOffset = this.x + i*Letter.width;
-        var letter = new Letter(wordString.charAt(i), xOffset, this.y);
+
+        var character = wordString.charAt(i);
+        var letterId = character + "" + (letterSeed + i);
+
+        var letter = new Letter(wordString.charAt(i), xOffset, this.y, letterId);
 
         this.width += Letter.width;
 
@@ -51,21 +55,25 @@ function Word(wordString, x, y) {
         this.nextWord = word;
     }
 
+    this.clickedInBounds = clickedInBounds;
+    function clickedInBounds(mouseX, mouseY) {
+            var leftBound = this.x;
+            var rightBound = this.x + this.width;
+            var upperBound = this.y;
+            var lowerBound = this.y + this.height;
+
+            return (mouseX > leftBound &&
+                    mouseX <= rightBound &&
+                    mouseY > upperBound &&
+                    mouseY <= lowerBound);
+    }
+
     this.getClickedLetter = getClickedLetter;
     function getClickedLetter(mouseX, mouseY) {
 
         for (var i in this.letters) {
             var letter = this.letters[i];
-
-            var leftBound = letter.x;
-            var rightBound = letter.x + Letter.width;
-            var upperBound = letter.y;
-            var lowerBound = letter.y + Letter.height;
-
-            if (mouseX > leftBound &&
-                mouseX <= rightBound &&
-                mouseY > upperBound &&
-                mouseY <= lowerBound) {
+            if (letter.clickedInBounds(mouseX, mouseY)) {
                 return letter;
             }
         }
