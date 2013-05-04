@@ -43,11 +43,15 @@ function CodeHandler() {
             dataType: "JSON",
             success: function(data) {
                 console.log(data);
-                $('#canvas').fadeOut(500, function() { 
-                    $(this).remove()
-                    MapHandler.mapInitialize(data.lat, data.lng, data.info);
-                });
+                if (data.success) {
+                    $('#canvas').fadeOut(500, function() {
+                        $(this).remove()
 
+                        $('#canvasContainer').hide();
+                        MapHandler.mapInitialize(data.lat, data.lng, data.info);
+                        $('#canvasContainer').fadeIn(800);
+                    });
+                }
                 //MapHandler.mapInitialize(data.lat, data.lng);
                 
             },

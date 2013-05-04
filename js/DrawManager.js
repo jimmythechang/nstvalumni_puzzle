@@ -8,12 +8,13 @@ function DrawManager() {
     this.words = [];
     this.clickedWord = null;
 
-    this.upArrow = new Arrow(200, 100, true);
-    this.downArrow = new Arrow(200, 300, false);
+    this.upArrow = new Arrow(400, 100, true);
+    this.downArrow = new Arrow(400, 300, false);
 
     this.draw = draw;
     function draw() {
         this.clearScreen();
+        this.drawText();
         this.drawWords();
 
         this.drawArrows();
@@ -28,6 +29,14 @@ function DrawManager() {
     this.registerWord = registerWord;
     function registerWord(word) {
         this.words.push(word);
+    }
+
+    this.drawText = drawText;
+    function drawText() {
+        var ctx = window.globalManager.ctx;
+        ctx.font = '24pt Arial';
+        ctx.fillStyle = "#000000";
+        ctx.fillText("so what brings you out west", 100, 100);
     }
 
 
