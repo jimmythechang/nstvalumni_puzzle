@@ -11,10 +11,9 @@ require(requireArr, function($) {
         var word2 = new Word("DESTINY", 400, 200, 400);
         gm.drawManager.registerWord(word2);
 
-        var word3 = new Word("LEVITY", 400, 200, 200);
+        var word3 = new Word("LEVITY", 400, 0, 200);
 
-        var word4 = new Word("INSANITY", 400, 200, 300);
-
+        var word4 = new Word("INSANITY", 400, 0, 300);
 
 
         // Link the words together.

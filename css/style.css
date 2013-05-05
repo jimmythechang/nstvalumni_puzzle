@@ -1,9 +1,11 @@
 
+
 root { 
     display: block;
 }
 
 #canvasContainer {
     min-height: 500px;
+    font-family: 'Oswald', sans-serif;
 }
 

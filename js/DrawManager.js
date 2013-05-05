@@ -34,8 +34,8 @@ function DrawManager() {
     this.drawText = drawText;
     function drawText() {
         var ctx = window.globalManager.ctx;
-        ctx.font = '24pt Arial';
-        ctx.fillStyle = "#000000";
+        ctx.font = '24pt Oswald';
+        ctx.fillStyle = "#ffffff";
         ctx.fillText("so what brings you out west", 100, 100);
     }
 
@@ -65,12 +65,25 @@ function DrawManager() {
         var word = null;
 
         if (this.upArrow.clickedInBounds(mouseX, mouseY)) {
-            word = this.words.pop();
-            this.registerWord(word.nextWord);
+            word = this.words[1];
+            word.moveTo(-100);
+
+            var nextWord = word.nextWord;
+            nextWord.setY(word.y + 100);
+            nextWord.moveTo(-100);
+
+            this.registerWord(nextWord);
+
         }
         else if (this.downArrow.clickedInBounds(mouseX, mouseY)) {
-            word = this.words.pop();
-            this.registerWord(word.previousWord);
+            word = this.words[1];
+            word.moveTo(100);
+
+            var previousWord = word.previousWord;
+            previousWord.setY(word.y - 100);
+            previousWord.moveTo(100);
+
+            this.registerWord(previousWord);
         }
     }
 
@@ -78,6 +91,17 @@ function DrawManager() {
     function drawArrows() {
         this.upArrow.draw();
         this.downArrow.draw();
+    }
+
+    this.wordsAreMoving = wordsAreMoving;
+    function wordsAreMoving() {
+        for (var i in this.words) {
+            if (this.words[i].isMoving) {
+                return true;
+            }
+        }
+
+        return false;
     }
     
 }

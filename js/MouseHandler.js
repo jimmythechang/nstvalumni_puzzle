@@ -49,6 +49,21 @@ function MouseHandler() {
             var x = thisMouseHandler.x;
             var y = thisMouseHandler.y
 
+            // Check to see if we're currently moving
+            // any Words; if so, ignore Arrow clicks.
+            if (drawManager.wordsAreMoving()) {
+                return;
+            }
+
+            // The DrawManager's Words array will have more than two
+            // Words if and *only* if we just finished moving some Words.
+            // If this is the case, remove the Word at index 1, as it
+            // is no longer visible.
+
+            if (drawManager.words.length > 2) {
+                drawManager.words.splice(1, 1);
+            }
+
             // If a the click is in the boundary of a word...
             if (drawManager.determinesWordIsInRange(x, y)) {
                 // ...determine which letter was clicked.

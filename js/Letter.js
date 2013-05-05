@@ -13,7 +13,7 @@ function Letter(character, x, y, id) {
         var ctx = window.globalManager.ctx;
         ctx.strokeRect(this.x, this.y, Letter.width, Letter.height);
 
-        ctx.font = '24pt Arial';
+        ctx.font = '24pt Oswald';
         if (this.isClicked) {
             ctx.fillStyle = "red";
         }

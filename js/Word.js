@@ -8,7 +8,8 @@ function Word(wordString, x, y, letterSeed) {
 
     this.letters = [];
 
-    this.changeable = true;
+    this.isMoving = false;
+    this.distance = 0;
 
     this.previousWord = null;
     this.nextWord = null;
@@ -32,10 +33,12 @@ function Word(wordString, x, y, letterSeed) {
         var ctx = window.globalManager.ctx;
         ctx.strokeRect(this.x, this.y, this.width, this.height);
 
+        if (this.isMoving) {
+            this.move();
+        }
+
         this.drawLetters();
         
-        if (this.changeable) {
-        }
     }
 
     this.drawLetters = drawLetters;
@@ -78,6 +81,40 @@ function Word(wordString, x, y, letterSeed) {
             }
         }
 
-       return "Nuffin";
+       return null;
+    }
+
+    this.setY = setY;
+    function setY(y) {
+        this.y = y;
+        for (var i in this.letters) {
+            this.letters[i].y = y;
+        }
+    }
+
+    // Indicates a relative distance in the y-direction for this Word to move to.
+    this.moveTo = moveTo;
+    function moveTo(y) {
+        this.isMoving = true;
+        this.distance = Math.abs(y);
+        if (y < 0) {
+            this.delta = -10;
+        }
+        else {
+            this.delta = 10;
+        }
+    }
+
+    this.move = move;
+    function move() {
+
+        if (this.distance > 0) {
+            this.distance -= Math.abs(this.delta);
+            this.setY(this.y + this.delta);
+        }
+        else {
+            this.distance = 0;
+            this.isMoving = false;
+        }
     }
 }
