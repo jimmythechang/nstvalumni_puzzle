@@ -6,8 +6,10 @@ function MouseHandler() {
     this.x = 0;
     this.y = 0;
 
-    this.canvasXOffset = 8;
-    this.canvasYOffset = 8;
+    var canvasOffset = $('#canvas').offset();
+
+    this.canvasXOffset = 0;
+    this.canvasYOffset = 0;
 
     this.init = init;
     function init() {
@@ -20,10 +22,8 @@ function MouseHandler() {
         var thisMouseHandler = this;
 
         $('#canvas').mousemove(function (e) {
-           // For debugging.
-           thisMouseHandler.x = e.pageX - thisMouseHandler.canvasXOffset;
-           thisMouseHandler.y = e.pageY - thisMouseHandler.canvasYOffset;
-           thisMouseHandler._displayMousePosition();
+           thisMouseHandler.x = e.pageX - this.offsetLeft;
+           thisMouseHandler.y = e.pageY - this.offsetTop;
         });
     }
 
@@ -64,6 +64,8 @@ function MouseHandler() {
                 drawManager.words.splice(1, 1);
             }
 
+
+
             // If a the click is in the boundary of a word...
             if (drawManager.determinesWordIsInRange(x, y)) {
                 // ...determine which letter was clicked.
@@ -73,7 +75,6 @@ function MouseHandler() {
                 var codeHandler = window.globalManager.codeHandler;
                 codeHandler.registerLetter(letter);
 
-                $('#clickDebug').text("Letter clicked: " + letter.character);
                 return;
             }
 

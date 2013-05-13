@@ -8,19 +8,31 @@ function Letter(character, x, y, id) {
 
     this.isClicked = false;
 
+    this.kerning = 0;
+
     this.draw = draw;
     function draw() {
         var ctx = window.globalManager.ctx;
-        ctx.strokeRect(this.x, this.y, Letter.width, Letter.height);
+        
+        ctx.save();
 
-        ctx.font = '24pt Oswald';
+        ctx.font = '36pt Oswald';
         if (this.isClicked) {
             ctx.fillStyle = "red";
         }
         else {
-            ctx.fillStyle = "#000000";
+            ctx.fillStyle = "#ffffff";
         }
-        ctx.fillText(this.character, this.x, this.y + Letter.height);
+
+        ctx.shadowColor = "#000000";
+        ctx.shadowBlur = 3;
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+
+        ctx.fillText(this.character, this.x + this.kerning, this.y + Letter.height);
+        
+        ctx.restore();
+
     }
 
     this.toggle = toggle;
@@ -42,5 +54,5 @@ function Letter(character, x, y, id) {
     }
 }
 
-Letter.width = 30;
-Letter.height = 40;
+Letter.width = 40;
+Letter.height = 60;

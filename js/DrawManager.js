@@ -8,15 +8,16 @@ function DrawManager() {
     this.words = [];
     this.clickedWord = null;
 
-    this.upArrow = new Arrow(475, 150, true);
-    this.downArrow = new Arrow(475, 300, false);
+    this.upArrow = new Arrow(550, 180, true);
+    this.downArrow = new Arrow(550, 300, false);
 
     this.draw = draw;
     function draw() {
         this.clearScreen();
-        this.drawText();
         this.drawWords();
 
+        this.drawWordCovers();
+        this.drawText();
         this.drawArrows();
     }
 
@@ -34,9 +35,17 @@ function DrawManager() {
     this.drawText = drawText;
     function drawText() {
         var ctx = window.globalManager.ctx;
-        ctx.font = '24pt Oswald';
+        ctx.save();
+        ctx.font = '36pt Oswald';
         ctx.fillStyle = "#ffffff";
-        ctx.fillText("so what brings you out west", 100, 100);
+        ctx.shadowColor = "#000000";
+        ctx.shadowBlur = 3;
+        ctx.shadowOffsetX = 1;
+        ctx.shadowOffsetY = 1;
+
+        ctx.fillText("so what brings you out west", 125, 100);
+
+        ctx.restore();
     }
 
 
@@ -66,6 +75,8 @@ function DrawManager() {
 
         if (this.upArrow.clickedInBounds(mouseX, mouseY)) {
             word = this.words[1];
+            word.unsetAllLetters();
+
             word.moveTo(-100);
 
             var nextWord = word.nextWord;
@@ -77,6 +88,8 @@ function DrawManager() {
         }
         else if (this.downArrow.clickedInBounds(mouseX, mouseY)) {
             word = this.words[1];
+            word.unsetAllLetters();
+            
             word.moveTo(100);
 
             var previousWord = word.previousWord;
@@ -84,6 +97,7 @@ function DrawManager() {
             previousWord.moveTo(100);
 
             this.registerWord(previousWord);
+
         }
     }
 
@@ -91,6 +105,15 @@ function DrawManager() {
     function drawArrows() {
         this.upArrow.draw();
         this.downArrow.draw();
+    }
+
+    this.drawWordCovers = drawWordCovers;
+    function drawWordCovers() {
+        var ctx = window.globalManager.ctx;
+
+        ctx.fillStyle = "#008CFF";
+        ctx.fillRect(425, 100, 350, 100);
+        ctx.fillRect(425, 275, 350, 100);
     }
 
     this.wordsAreMoving = wordsAreMoving;
@@ -103,6 +126,7 @@ function DrawManager() {
 
         return false;
     }
+
     
 }
 

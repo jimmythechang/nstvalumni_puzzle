@@ -9,7 +9,7 @@ MapHandler.mapInitialize = function(lat, lng, content) {
     center: latLng,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   }
-  var map = new google.maps.Map($('#canvasContainer')[0], mapOptions);
+  var map = new google.maps.Map($('#mapContainer')[0], mapOptions);
 
   var infoWindow = new google.maps.InfoWindow({
      content: content

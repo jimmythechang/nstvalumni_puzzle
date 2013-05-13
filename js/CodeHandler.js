@@ -1,3 +1,5 @@
+var validatorUrl = "Validator.php";
+
 /**
  * Responsible for sending off clicked letters for verification.
  */
@@ -24,41 +26,58 @@ function CodeHandler() {
         // Either removes the element from the array if it already
         // exists, or adds it to the end.
         if (i >= 0) {
-            this.letters.splice(i, 1);
+            var splicedLetter = this.letters.splice(i, 1);
         }
         else {
             this.letters.push(id);
         }
 
         this.verifyLetters();
-        console.log(this.letters);
     }
 
     this.validate = validate;
     function validate() {
+        var codeHandler = this;
+        
         $.ajax({
-            url: "Validator.php",
+            url: validatorUrl,
             type: "POST",
             data: { letterArr : this.letters },
             dataType: "JSON",
             success: function(data) {
-                console.log(data);
                 if (data.success) {
                     $('#canvas').fadeOut(500, function() {
-                        $(this).remove()
+                        $('#canvasContainer').remove();
+                        $('#mapContainer').css('height', '500');
+                        MapHandler.mapInitialize(data.lat, data.lng, data.address);
 
-                        $('#canvasContainer').hide();
-                        MapHandler.mapInitialize(data.lat, data.lng, data.info);
-                        $('#canvasContainer').fadeIn(800);
+                        // Shoot another AJAX call to get the form; 
+                        // the puzzle "hangs" otherwise.
+                        $('#infoContainer').html(data.info);
+                        codeHandler.getForm();                        
                     });
-                }
-                //MapHandler.mapInitialize(data.lat, data.lng);
-                
+                }                
             },
-            error: function() {
-                console.log("Errorrrr");
+            error: function(data) {
             }
         });
+    }
+    
+    this.getForm = getForm;
+    function getForm() {
+        $.ajax({
+            url: validatorUrl,
+            type: "POST",
+            data: {letterArr: this.letters, action: 'getForm'},
+            dataType: "JSON",
+            success: function(data) {
+                $('body').append(data.html);
+            },
+            error: function(data) {
+                
+            }
+            
+        })
     }
 
 

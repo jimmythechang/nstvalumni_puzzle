@@ -4,7 +4,7 @@ function Word(wordString, x, y, letterSeed) {
     this.y = y;
 
     this.width = 0;
-    this.height = 40;
+    this.height = Letter.height;
 
     this.letters = [];
 
@@ -22,6 +22,11 @@ function Word(wordString, x, y, letterSeed) {
 
         var letter = new Letter(wordString.charAt(i), xOffset, this.y, letterId);
 
+        if (letter.character == "I") {
+            letter.kerning = 6;
+        }
+
+
         this.width += Letter.width;
 
         this.letters.push(letter);
@@ -31,14 +36,13 @@ function Word(wordString, x, y, letterSeed) {
     function draw() {
         // For debugging purposes.
         var ctx = window.globalManager.ctx;
-        ctx.strokeRect(this.x, this.y, this.width, this.height);
+        //ctx.strokeRect(this.x, this.y, this.width, this.height);
 
         if (this.isMoving) {
             this.move();
         }
 
         this.drawLetters();
-        
     }
 
     this.drawLetters = drawLetters;
@@ -84,6 +88,19 @@ function Word(wordString, x, y, letterSeed) {
        return null;
     }
 
+    this.unsetAllLetters = unsetAllLetters;
+    function unsetAllLetters() {
+        var codeHandler = window.globalManager.codeHandler;
+
+        for (var i in this.letters) {
+            var letter = this.letters[i];
+            if (letter.isClicked) {
+                letter.isClicked = false;
+                codeHandler.registerLetter(letter);
+            }
+        }
+    }
+
     this.setY = setY;
     function setY(y) {
         this.y = y;
@@ -98,10 +115,10 @@ function Word(wordString, x, y, letterSeed) {
         this.isMoving = true;
         this.distance = Math.abs(y);
         if (y < 0) {
-            this.delta = -10;
+            this.delta = -16;
         }
         else {
-            this.delta = 10;
+            this.delta = 16;
         }
     }
 
@@ -109,6 +126,15 @@ function Word(wordString, x, y, letterSeed) {
     function move() {
 
         if (this.distance > 0) {
+            if (this.distance < Math.abs(this.delta)) {
+                if (this.delta < 0) {
+                    this.delta = -(this.distance);
+                }
+                else {
+                    this.delta = this.distance;
+                }
+            }
+
             this.distance -= Math.abs(this.delta);
             this.setY(this.y + this.delta);
         }
@@ -116,5 +142,6 @@ function Word(wordString, x, y, letterSeed) {
             this.distance = 0;
             this.isMoving = false;
         }
-    }
+     }
+
 }

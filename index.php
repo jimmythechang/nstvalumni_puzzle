@@ -10,14 +10,10 @@
     </head>
     <body>
         <div id="canvasContainer">
-            <canvas id="canvas" height="600" width="800" style="border: 1px solid #000">
+            <canvas id="canvas" width="800" height="500">
             </canvas>
         </div>
-        <!--
-        <div id="positionDebug"></div>
-        <div id="alphaDebug"></div>
-        <div id="clickDebug"></div>
-        -->
+        <div id="mapContainer"></div>
     </body>
 </html>
 

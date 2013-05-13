@@ -20,7 +20,7 @@ function Arrow(x, y, up) {
         ctx.lineTo(this.x + Arrow.width, this.y);
         ctx.lineTo(this.x + (Arrow.width / 2), this.y - Arrow.height * invert);
         ctx.lineTo(this.x, this.y);
-        ctx.fillStyle = "blue";
+        ctx.fillStyle = "#ffffff";
         ctx.fill();
     }
 
@@ -53,5 +53,5 @@ function Arrow(x, y, up) {
     }
 }
 
-Arrow.width = 50;
-Arrow.height = 50;
+Arrow.width = 20;
+Arrow.height = 30;

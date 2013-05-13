@@ -1,11 +1,87 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald);
 
-
-root { 
-    display: block;
+body {
+    background: #008CFF;
 }
+
+/* DIRECTIONS PAGE */
+
+/* No Canvas... */
+
+#regrettable {
+    font-family: Oswald;
+    color: #fff;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+#otherBrowserContainer {
+    width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.otherBrowser {
+    margin-right: 40px;
+}
+
+.otherBrowser img {
+    width: 100px;
+}
+
 
 #canvasContainer {
-    min-height: 500px;
-    font-family: 'Oswald', sans-serif;
+    width: 800px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
 }
 
+#canvasContainer canvas {
+    font-family: Oswald;
+}
+
+#infoContainer {
+    font-family: Oswald;
+    font-size: 34px;
+    color: #fff;
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 40px;
+    text-shadow: 2px 2px #000;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+#infoContainer h1 {
+    font-size: 38px;
+}
+
+#mapContainer {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+#mapContainer img {
+    max-width: none;
+}
+
+#infoWindowContent {
+    font-family: Oswald;
+}
+
+.databaseFormContainer {
+    max-width: 460px !important;
+}
+
+.databaseFormContainer #content {
+    margin-top: 0px !important;
+}
+
+#wrapper {
+    margin-top: 40px !important;
+}
